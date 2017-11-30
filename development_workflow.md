@@ -1,4 +1,4 @@
-# Developement Workflow
+# Development Workflow
 
 ## Keeping local packages outside of julia directory
 
