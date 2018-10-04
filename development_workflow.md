@@ -2,26 +2,31 @@
 
 ## Keeping local packages outside of julia directory
 
-Keeping personal packages outside of `Pkg.dir()` is convinient for many reasons. For instance, you may want to manage your git workflow and allow `Pkg.update()` ignore such packages. To do so, you can add to the path to your .juliarc file 
+In Julia 1.0 when developing packages you want to be using `Pkg.dev` instead of `Pkg.add`. This will tell the package manager to treat the package differently in to main ways:
 
-```julia
-const LOCAL_PACKAGES = expanduser("~/src/julia-local-packages/")
-push!(LOAD_PATH, LOCAL_PACKAGES)
+* The package manager will never touch these files. Git operations are the user responsability
+* The project will be stateful. That is , its state depends on the current content of the files at the path
+
+[Link](https://docs.julialang.org/en/v1/stdlib/Pkg/index.html#Developing-packages-1) to the relevant section of the documentation discussing how to use the package manager for your own projects.
+
+Example of adding a package to use for development:
+
+```
+(v1.0) pkg> dev BioServices
+```
+
+By default these packages/projects are cloned to ~/.julia/dev/. To chnage such path simply change the related envaronment variable in julia's startup script. i.e,
+
+```
+echo 'ENV["JULIA_PKG_DEVDIR"] = "~/julia_dev"' > ~/.julia/config/startup.jl
 ```
 
 When generating local packages, you can now specify your local path
 
-```
-import PkgDev
-PkgDev.generate("MyPkg", "MIT"; path = joinpath(LOCAL_PACKAGES, "MyPkg"))
-```
+????
 
-Finally, testing packages outside the julia directory (before Pkg3) can be done using [RoguePkg.jl](https://github.com/tpapp/RoguePkg.jl)
+Finally, testing dev packages 
 
-```julia
-Pkg.test(pkg_for"MyPkg")
-```
+???
 
 ## Autoreloading code
-
-[Revise.jl](https://github.com/timholy/Revise.jl) tracks changes to loaded modules and autoreloads when necessary.  It handles most changes, except for type redefinitions. It is very useful during development phase and it works botth in the REPL and Jupyter Notebooks.
