@@ -2,7 +2,7 @@
 
 ## Keeping local packages outside of julia directory
 
-In Julia 1.0 when developing packages you want to be using `Pkg.dev` instead of `Pkg.add`. This will tell the package manager to treat the package differently in to main ways:
+In Julia 1.0 when developing packages you want to be using `Pkg.dev` instead of `Pkg.add`. This will tell the package manager to treat the package differently in two main ways:
 
 * The package manager will never touch these files. Git operations are the user responsability
 * The project will be stateful. That is , its state depends on the current content of the files at the path
