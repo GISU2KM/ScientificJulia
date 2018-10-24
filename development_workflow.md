@@ -15,7 +15,7 @@ Example of adding a package to use for development:
 (v1.0) pkg> dev BioServices
 ```
 
-By default these packages/projects are cloned to ~/.julia/dev/. To chnage such path simply change the related envaronment variable in julia's startup script. i.e,
+By default these packages/projects are cloned to ~/.julia/dev/. To change this path simply change the related envaronment variable in julia's startup script. i.e,
 
 ```
 echo 'ENV["JULIA_PKG_DEVDIR"] = "~/julia_dev"' > ~/.julia/config/startup.jl
